@@ -6,14 +6,26 @@ registerApplication({
     System.import(
       "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js"
     ),
-  activeWhen: ["/"],
+  activeWhen: (location) => location.pathname === '/',
 });
 
-// registerApplication({
-//   name: "@mouts/navbar",
-//   app: () => System.import("@mouts/navbar"),
-//   activeWhen: ["/"]
-// });
+registerApplication({
+  name: "@mouts/application-one",
+  app: () => System.import("@mouts/application-one"),
+  activeWhen: (location) => location.pathname === '/application-one',
+  customProps: (name, location) => {
+    return { authToken: "d83jD63UdZ6RS6f70D0" };
+  }
+});
+
+registerApplication({
+  name: "@mouts/application-two",
+  app: () => System.import("@mouts/application-two"),
+  activeWhen: (location) => location.pathname === '/application-two',
+  customProps: (name, location) => {
+    return { authToken: "d83jD63UdZ6RS6f70D0" };
+  }
+});
 
 start({
   urlRerouteOnly: true,

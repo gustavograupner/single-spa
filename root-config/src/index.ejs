@@ -32,7 +32,9 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.5.5/lib/system/single-spa.min.js"
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.5.5/lib/system/single-spa.min.js",
+        "react": "https://unpkg.com/react@17/umd/react.production.min.js",
+        "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
       }
     }
   </script>
@@ -46,7 +48,9 @@
     {
       "imports": {
         "@mouts/root-config": "//localhost:9000/mouts-root-config.js",
-        "@mouts/application-one": "//localhost:8080/mouts-application-one.js"
+        "@mouts/application-one": "//localhost:8500/mouts-application-one.js",
+        "@mouts/application-two": "//localhost:8600/mouts-application-two.js",
+        "@mouts/navbar": "//localhost:8700/mouts-navbar.js",
       }
     }
   </script>
