@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Root({name}) {
+export default function Root({ name }) {
   return (
     <div
       style={{
@@ -13,7 +13,7 @@ export default function Root({name}) {
     >
       <h5>{name}</h5>
       <button type="button" class="btn btn-primary">
-        SUB
+        ADD
       </button>
     </div>
   );
