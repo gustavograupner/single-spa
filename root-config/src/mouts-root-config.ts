@@ -1,31 +1,20 @@
-import { registerApplication, start } from "single-spa";
+import { registerApplication, start } from 'single-spa';
+import {
+  constructApplications,
+  constructRoutes,
+  constructLayoutEngine,
+} from 'single-spa-layout';
+const routes = constructRoutes(document.querySelector('#single-spa-layout'));
 
-registerApplication({
-  name: "@single-spa/welcome",
-  app: () =>
-    System.import(
-      "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js"
-    ),
-  activeWhen: (location) => location.pathname === '/',
+const applications = constructApplications({
+  routes,
+  loadApp({ name }) {
+    return System.import(name);
+  },
 });
 
-registerApplication({
-  name: "@mouts/application-one",
-  app: () => System.import("@mouts/application-one"),
-  activeWhen: (location) => location.pathname === '/application-one',
-  customProps: (name, location) => {
-    return { authToken: "d83jD63UdZ6RS6f70D0" };
-  }
-});
-
-registerApplication({
-  name: "@mouts/application-two",
-  app: () => System.import("@mouts/application-two"),
-  activeWhen: (location) => location.pathname === '/application-two',
-  customProps: (name, location) => {
-    return { authToken: "d83jD63UdZ6RS6f70D0" };
-  }
-});
+constructLayoutEngine({ routes, applications });
+applications.forEach(registerApplication);
 
 start({
   urlRerouteOnly: true,
