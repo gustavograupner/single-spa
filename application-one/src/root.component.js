@@ -1,6 +1,11 @@
 import React from "react";
+import { eventEmitter } from "@mouts/event";
 
 export default function Root({ name }) {
+  const handleOnClick = () => {
+    eventEmitter("@mouts/counter", "add");
+  };
+
   return (
     <div
       style={{
@@ -8,11 +13,11 @@ export default function Root({ name }) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
       <h5>{name}</h5>
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-primary" onClick={handleOnClick}>
         ADD
       </button>
     </div>

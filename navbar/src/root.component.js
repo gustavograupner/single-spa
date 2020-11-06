@@ -1,8 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { links } from "./root.helper";
 import { Link } from "@reach/router";
+import { eventListener } from "@mouts/event";
+import OperationTypes from "./types/OperationTypes";
 
 export default function Root(props) {
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    eventListener("@mouts/counter", (event) => {
+      switch (event.detail) {
+        case OperationTypes.ADD:
+          setCounter((oldCounter) => oldCounter + 1);
+          break;
+        case OperationTypes.SUB:
+          setCounter((oldCounter) => oldCounter - 1);
+          break;
+      }
+    });
+  }, []);
+
   return (
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <Link
@@ -24,8 +41,8 @@ export default function Root(props) {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          {links.map(link => {
+        <div class="navbar-nav mr-auto">
+          {links.map((link) => {
             return (
               <Link
                 key={link.href}
@@ -33,7 +50,7 @@ export default function Root(props) {
                 to={link.href}
                 getProps={({ isCurrent }) => {
                   return {
-                    className: isCurrent ? "nav-link active" : "nav-link"
+                    className: isCurrent ? "nav-link active" : "nav-link",
                   };
                 }}
               >
@@ -42,6 +59,7 @@ export default function Root(props) {
             );
           })}
         </div>
+        <h2 class="navbar-text">{counter}</h2>
       </div>
     </nav>
   );
