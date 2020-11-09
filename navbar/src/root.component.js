@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { links } from "./root.helper";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import { eventListener } from "@mouts/event";
+import { clearUserToken } from "@mouts/api";
 import OperationTypes from "./types/OperationTypes";
+import { post } from "@mouts/api";
 
 export default function Root(props) {
   const [counter, setCounter] = useState(0);
@@ -19,6 +21,13 @@ export default function Root(props) {
       }
     });
   }, []);
+
+  useEffect(() => {
+    post("/counter", {
+      date: new Date(),
+      counter
+    });
+  }, [counter]);
 
   return (
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -61,9 +70,16 @@ export default function Root(props) {
         </div>
         <h2 class="navbar-text">{counter}</h2>
         <div style={{ marginLeft: "20px" }}>
-          <Link class="navbar-text" to={"/"}>
-            Sair
-          </Link>
+          <div
+            style={{ cursor: "pointer" }}
+            class="navbar-text"
+            onClick={() => {
+              clearUserToken();
+              navigate("/auth");
+            }}
+          >
+            Exit
+          </div>
         </div>
       </div>
     </nav>
