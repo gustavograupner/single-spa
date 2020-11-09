@@ -8,13 +8,13 @@ export default function Root(props) {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    eventListener("@mouts/counter", (event) => {
+    eventListener("@mouts/counter", event => {
       switch (event.detail) {
         case OperationTypes.ADD:
-          setCounter((oldCounter) => oldCounter + 1);
+          setCounter(oldCounter => oldCounter + 1);
           break;
         case OperationTypes.SUB:
-          setCounter((oldCounter) => oldCounter - 1);
+          setCounter(oldCounter => oldCounter - 1);
           break;
       }
     });
@@ -42,7 +42,7 @@ export default function Root(props) {
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav mr-auto">
-          {links.map((link) => {
+          {links.map(link => {
             return (
               <Link
                 key={link.href}
@@ -50,7 +50,7 @@ export default function Root(props) {
                 to={link.href}
                 getProps={({ isCurrent }) => {
                   return {
-                    className: isCurrent ? "nav-link active" : "nav-link",
+                    className: isCurrent ? "nav-link active" : "nav-link"
                   };
                 }}
               >
@@ -60,6 +60,11 @@ export default function Root(props) {
           })}
         </div>
         <h2 class="navbar-text">{counter}</h2>
+        <div style={{ marginLeft: "20px" }}>
+          <Link class="navbar-text" to={"/"}>
+            Sair
+          </Link>
+        </div>
       </div>
     </nav>
   );
