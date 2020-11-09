@@ -51,6 +51,7 @@
         "@mouts/root-config": "//localhost:9000/mouts-root-config.js",
         "@mouts/application-one": "//localhost:9001/mouts-application-one.js",
         "@mouts/application-two": "//localhost:9002/mouts-application-two.js",
+        "@mouts/auth": "//localhost:9003/mouts-auth.js",
         "@mouts/navbar": "//localhost:8082/mouts-navbar.js",
         "@mouts/event": "//localhost:8081/mouts-event.js"
       }
@@ -86,11 +87,17 @@
         <application name="@mouts/navbar"></application>
       </nav>
       <div class="main-content">
+        <route path="auth">
+          <application name="@mouts/auth"></application>
+        </route>
         <route path="application-one">
           <application name="@mouts/application-one"></application>
         </route>
         <route path="application-two">
           <application name="@mouts/application-two"></application>
+        </route>
+        <route default>
+          <application name="@mouts/auth"></application>
         </route>
       </div>
     </single-spa-router>
